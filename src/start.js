@@ -39,7 +39,7 @@ function createWindow() {
         });
 
         // load images
-        const files = imagePaths.filePaths.map(filePath => Fs.readFileSync(filePath));
+        const files = imagePaths.filePaths.map(filePath => Fs.readFileSync(filePath, { encoding: 'base64' }));
         event.sender.send('fileLoadedIntoMemory', files);
     });
 } 

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import './ImageGrid.css';
+import { Storage } from '../../classes/storage.object';
 
 const { ipcRenderer } = window.require('electron');
 
 export function ImageGrid() {
 
-    ipcRenderer.on('fileLoadedIntoMemory', (event, imagePath) => {
-        console.log('file!', imagePath);
+    ipcRenderer.on('fileLoadedIntoMemory', (event, images: Uint8Array[]) => {
+        console.log('images', images);
     });
 
     return (
