@@ -11,11 +11,7 @@ export function ImageGrid() {
 
     return (
         <div className={"image-grid-master"} >
-            I Am The Image Grid
-            <button onClick={() => {
-                console.log('Pressed The Image!');
-                ipcRenderer.send('openImageFileDialog');
-            }}>Add Image</button>
+            <button onClick={() => ipcRenderer.send('openImageFileDialog')}>Add Image</button>
         </div>
     );
 }

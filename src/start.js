@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
+const Fs = require('fs');
 
 let mainWindow;
 
@@ -27,11 +28,19 @@ function createWindow() {
 
     // HOOKS
     ipcMain.on('openImageFileDialog', async (event, data) => {
-        console.log('opening file dialog!');
-        const imagePath = await dialog.showOpenDialog(mainWindow, {
+        // open file dialog
+        const imagePaths = await dialog.showOpenDialog(mainWindow, {
             title: 'Select Image',
+            filters: [
+                { name: 'Images', extensions: ['png', 'jpg', 'gif'] },
+                { name: 'Videos', extensions: ['webm'] },
+            ],
+            properties: ['openFile', 'multiSelections'],
         });
-        event.sender.send('fileLoadedIntoMemory', imagePath);
+
+        // load images
+        const files = imagePaths.filePaths.map(filePath => Fs.readFileSync(filePath));
+        event.sender.send('fileLoadedIntoMemory', files);
     });
 } 
 
