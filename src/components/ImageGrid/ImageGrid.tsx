@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import './ImageGrid.css';
 import { Storage } from '../../classes/storage.object';
+import { PreviewImage } from './PreviewImage';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -15,11 +16,8 @@ export function ImageGrid() {
 
     return (
         <div className={"image-grid-master"} >
+            { displayImages.map(displayImage => <PreviewImage base64Image={ displayImage } key={displayImage} />) }
             <button onClick={() => ipcRenderer.send('openImageFileDialog')}>Add Image</button>
-            { displayImages.map(displayImage => <div key={displayImage}>
-                <img src={`data:image/png;base64, ${displayImage}`} alt={'broken image'} />
-            </div>) }
-            <p>{displayImages.length}</p>
         </div>
     );
 }

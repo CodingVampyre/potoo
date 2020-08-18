@@ -1,0 +1,23 @@
+.preview-image-master {
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+}
+
+.preview-image-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.preview-image-image:hover {
+    transition: ease-in-out;
+    transition-duration: 0.2s;
+    width: 150%;
+    height: 150%;
+}

@@ -32,7 +32,7 @@ function createWindow() {
         const imagePaths = await dialog.showOpenDialog(mainWindow, {
             title: 'Select Image',
             filters: [
-                { name: 'Images', extensions: ['png', 'jpg', 'gif'] },
+                { name: 'Images', extensions: ['png', 'jpg', 'jpeg', 'gif'] },
                 { name: 'Videos', extensions: ['webm'] },
             ],
             properties: ['openFile', 'multiSelections'],
