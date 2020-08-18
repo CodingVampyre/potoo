@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -10,7 +10,7 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: true,
-        }
+        },
     });
 
     mainWindow.loadURL(process.env.ELECTRON_START_URL || url.format({
@@ -21,6 +21,17 @@ function createWindow() {
 
     mainWindow.on('closed', () => {
         mainWindow = null;
+    });
+
+    mainWindow.webContents.openDevTools();
+
+    // HOOKS
+    ipcMain.on('openImageFileDialog', async (event, data) => {
+        console.log('opening file dialog!');
+        const imagePath = await dialog.showOpenDialog(mainWindow, {
+            title: 'Select Image',
+        });
+        event.sender.send('fileLoadedIntoMemory', imagePath);
     });
 } 
 
@@ -36,4 +47,5 @@ app.on('activate', () => {
     if (mainWindow === null) {
         createWindow();
     }
-})
+});
+
