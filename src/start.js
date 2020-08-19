@@ -46,16 +46,16 @@ function createWindow() {
     });
 
     ipcMain.on('storeImages', async (event, images) => {
-        event.sender.send('log', 'storing images now');
+        event.sender.send('log', '[storing] start');
         await db.storeImages(images);
-        event.sender.send('log', 'done storing images');
+        event.sender.send('log', '[storing] end');
         event.sender.send('storedImages');
     });
 
     ipcMain.on('fetchImages', async (event) => {
-        event.sender.send('log', 'fetching images now');
+        event.sender.send('log', '[fetching] start');
         const images = await db.listImages();
-        event.sender.send('log', 'fetched images');
+        event.sender.send('log', '[fetching] end');
         event.sender.send('fetchedImages', images);
     });
 } 
