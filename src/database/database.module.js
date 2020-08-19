@@ -1,11 +1,11 @@
 const Datastore = require('nedb');
 
 const db = new Datastore({
-    filename: path.join(__dirname, 'potoo.db'),
+    filename: `${__dirname}/potoo.db`,
     autoload: true,
 });
 
-export function storeImages(id, image, tags) {
+function storeImages(id, image, tags) {
     return new Promise((resolve, reject) => {
         db.insert({ id, image, tags, }, (error, newDoc) => {
             if (error) { return reject(error); }
@@ -14,7 +14,7 @@ export function storeImages(id, image, tags) {
     });
 }
 
-export function listImages() {
+function listImages() {
     return new Promise((resolve, reject) => {
         db.find({}, (error, docs) => {
             if (error) { return reject(error); }
@@ -22,3 +22,5 @@ export function listImages() {
         })
     });
 }
+
+module.exports = { storeImages, listImages }
