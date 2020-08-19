@@ -15,17 +15,21 @@ export function useImageList(): [IImage[], () => void, (images: string[]) => voi
         fetchImages();
     }, []);
 
+    ipcRenderer.on('fetchedImages', (event, images: IImage[]) => {
+        console.debug('fetched images', images);
+        setImages(images);
+    });
+
+    ipcRenderer.on('storedImages', (event) => {
+        console.debug('stored image');
+        fetchImages();
+    });
+
     function fetchImages() {
-        ipcRenderer.on('fetchedImages', (event, images: IImage[]) => {
-            setImages(images);
-        });
         ipcRenderer.send('fetchImages');
     }
 
     function storeImages(images: string[]) {
-        ipcRenderer.on('storedImages', (event) => {
-            fetchImages();
-        });
         ipcRenderer.send('storeImages', images);
     }
 

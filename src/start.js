@@ -40,18 +40,23 @@ function createWindow() {
         });
 
         // load images
+        event.sender.send('log', imagePaths);
         const files = imagePaths.filePaths.map(filePath => Fs.readFileSync(filePath, { encoding: 'base64' }));
         event.sender.send('fileLoadedIntoMemory', files);
     });
 
     ipcMain.on('storeImages', async (event, images) => {
-        db.storeImages(images);
-        ipcMain.send('storedImages');
+        event.sender.send('log', 'storing images now');
+        await db.storeImages(images);
+        event.sender.send('log', 'done storing images');
+        event.sender.send('storedImages');
     });
 
     ipcMain.on('fetchImages', async (event) => {
-        const images = db.listImages();
-        ipcMain.send('fetchedImaged', images);
+        event.sender.send('log', 'fetching images now');
+        const images = await db.listImages();
+        event.sender.send('log', 'fetched images');
+        event.sender.send('fetchedImages', images);
     });
 } 
 

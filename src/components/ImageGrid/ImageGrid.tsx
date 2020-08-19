@@ -10,7 +10,10 @@ export function ImageGrid() {
 
     const [images, fetchImages, storeImages] = useImageList();
 
+    ipcRenderer.on('log', (event, message: string) => { console.log(message); })
+
     ipcRenderer.on('fileLoadedIntoMemory', (event, images: string[]) => {
+        console.log('store images', images);
         storeImages(images);
     });
 
