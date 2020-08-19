@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
 const Fs = require('fs');
+const db = require('./database/database.module');
 
 let mainWindow;
 
@@ -41,6 +42,16 @@ function createWindow() {
         // load images
         const files = imagePaths.filePaths.map(filePath => Fs.readFileSync(filePath, { encoding: 'base64' }));
         event.sender.send('fileLoadedIntoMemory', files);
+    });
+
+    ipcMain.on('storeImages', async (event, images) => {
+        db.storeImages(images);
+        ipcMain.send('storedImages');
+    });
+
+    ipcMain.on('fetchImages', async (event) => {
+        const images = db.listImages();
+        ipcMain.send('fetchedImaged', images);
     });
 } 
 

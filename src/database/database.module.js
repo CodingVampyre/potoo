@@ -5,7 +5,7 @@ const db = new Datastore({
     autoload: true,
 });
 
-export function storeImage(id, image, tags) {
+export function storeImages(id, image, tags) {
     return new Promise((resolve, reject) => {
         db.insert({ id, image, tags, }, (error, newDoc) => {
             if (error) { return reject(error); }
