@@ -29,7 +29,6 @@ export function useImageList(): IUseImageListHook {
         });
 
         ipcRenderer.on('openImageFileDialogResult', (event, imagesBase64: string[]) => {
-            console.log('[openImageFileDialogResult]', imagesBase64);
             const images: IImage[] = imagesBase64.map(imageBase64 => {
                 return { id: uuid(), imageBase64, tags: [], }
             });
