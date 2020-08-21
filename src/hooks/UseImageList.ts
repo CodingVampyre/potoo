@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 const { ipcRenderer } = window.require('electron');
 
-interface IImage {
+export interface IImage {
     id: string;
     imageBase64: string;
     tags: string[];
@@ -26,6 +26,7 @@ export function useImageList(): IUseImageListHook {
 
         ipcRenderer.on('storeImageResult', (event) => {
             console.debug('[storeImageResult]');
+            fetchImages();
         });
 
         ipcRenderer.on('openImageFileDialogResult', (event, imagesBase64: string[]) => {
@@ -36,7 +37,9 @@ export function useImageList(): IUseImageListHook {
         });
     }, []);
 
-    ipcRenderer.on('log', (event, message: string) => { console.log(message); })
+    useEffect(() => {
+        fetchImages();
+    }, []);
 
     /** */
     function fetchImages() {

@@ -2,16 +2,16 @@ import * as React from 'react';
 import './ImageGrid.css';
 import { PreviewImage } from './PreviewImage';
 import { useImageList } from '../../hooks/UseImageList';
+import { ImageList } from './ImageList';
 
 export function ImageGrid() {
 
-    const { images, fetchImages, openImageFileDialog, } = useImageList();
+    const { images, openImageFileDialog, } = useImageList();
 
     return (
         <div className={"image-grid-master"} >
-            { images.map(image => <PreviewImage imageBase64={ image.imageBase64 } key={ image.id }/>) }
+            <ImageList images={ images } />
             <button onClick={() => openImageFileDialog()}>Add Image</button>
-            <button onClick={() => fetchImages()}>Fetch Images</button>
         </div>
     );
 }
