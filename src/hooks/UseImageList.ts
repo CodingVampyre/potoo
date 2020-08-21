@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 const { ipcRenderer } = window.require('electron');
 
 interface IImage {
@@ -7,25 +7,29 @@ interface IImage {
     tags: string[];
 }
 
-export function useImageList(): [IImage[], () => void, (images: string[]) => void] {
+export function useImageList(): [IImage[], () => void, (images: string[]) => void, () => void] {
 
     const [images, setImages] = useState<IImage[]>([]);
 
-    useEffect(() => {
-        fetchImages();
-    }, []);
+    ipcRenderer.on('log', (event, message: string) => { console.log(message); })
+
+    ipcRenderer.on('fileLoadedIntoMemory', (event, images: string[]) => {
+        console.log('fileLoadedIntoMemory', images);
+        storeImages(images);
+    });
 
     ipcRenderer.on('fetchedImages', (event, images: IImage[]) => {
-        console.debug('fetched images', images);
+        console.debug('fetchedImages', images);
         setImages(images);
     });
 
     ipcRenderer.on('storedImages', (event) => {
-        console.debug('stored image');
+        console.debug('storedImages');
         fetchImages();
     });
 
     function fetchImages() {
+        console.log('fetching images');
         ipcRenderer.send('fetchImages');
     }
 
@@ -33,5 +37,9 @@ export function useImageList(): [IImage[], () => void, (images: string[]) => voi
         ipcRenderer.send('storeImages', images);
     }
 
-    return [images, fetchImages, storeImages];
+    function openImageFileDialog() {
+        ipcRenderer.send('openImageFileDialog');
+    }
+
+    return [images, fetchImages, storeImages, openImageFileDialog];
 }

@@ -9,6 +9,7 @@ export function PreviewImage(props: {
             <img 
                 src={`data:image/png;base64, ${props.base64Image}`} 
                 className={"preview-image-image"}
+                alt="error"
             />
         </div>
     );

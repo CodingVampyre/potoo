@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
 const Fs = require('fs');
-const db = require('./database/database.module');
+const db = require('./electron/database.module');
 
 let mainWindow;
 
@@ -27,7 +27,10 @@ function createWindow() {
 
     mainWindow.webContents.openDevTools();
 
-    // HOOKS
+    // *********
+    // * Hooks *
+    // *********
+    
     ipcMain.on('openImageFileDialog', async (event, data) => {
         // open file dialog
         const imagePaths = await dialog.showOpenDialog(mainWindow, {
@@ -38,20 +41,20 @@ function createWindow() {
             ],
             properties: ['openFile', 'multiSelections'],
         });
-
+    
         // load images
         event.sender.send('log', imagePaths);
         const files = imagePaths.filePaths.map(filePath => Fs.readFileSync(filePath, { encoding: 'base64' }));
         event.sender.send('fileLoadedIntoMemory', files);
     });
-
+    
     ipcMain.on('storeImages', async (event, images) => {
         event.sender.send('log', '[storing] start');
         await db.storeImages(images);
         event.sender.send('log', '[storing] end');
         event.sender.send('storedImages');
     });
-
+    
     ipcMain.on('fetchImages', async (event) => {
         event.sender.send('log', '[fetching] start');
         const images = await db.listImages();
