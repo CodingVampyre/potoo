@@ -5,11 +5,11 @@ const db = new Datastore({
     autoload: true,
 });
 
-function storeImages(id, image, tags) {
+function storeImages(images) {
     return new Promise((resolve, reject) => {
-        db.insert({ id, image, tags, }, (error, newDoc) => {
+        db.insert(images, (error, newDocs) => {
             if (error) { return reject(error); }
-            else { return resolve(newDoc); }
+            else { return resolve(newDocs); }
         });
     });
 }

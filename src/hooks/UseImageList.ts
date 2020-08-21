@@ -1,16 +1,16 @@
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 const { ipcRenderer } = window.require('electron');
 
 interface IImage {
     id: string;
-    image: string;
+    imageBase64: string;
     tags: string[];
 }
 
 interface IUseImageListHook {
     images: IImage[];
     fetchImages: () => void;
-    storeImages: (images: string[]) => void; 
     openImageFileDialog: () => void;
 }
 
@@ -20,8 +20,11 @@ export function useImageList(): IUseImageListHook {
 
     ipcRenderer.on('log', (event, message: string) => { console.log(message); })
 
-    ipcRenderer.on('openImageFileDialogResult', (event, images: string[]) => {
-        console.log('[openImageFileDialogResult]', images);
+    ipcRenderer.on('openImageFileDialogResult', (event, imagesBase64: string[]) => {
+        console.log('[openImageFileDialogResult]', imagesBase64);
+        const images: IImage[] = imagesBase64.map(imageBase64 => {
+            return { id: uuid(), imageBase64, tags: [], }
+        });
         storeImages(images);
     });
 
@@ -39,7 +42,7 @@ export function useImageList(): IUseImageListHook {
         ipcRenderer.send('fetchImages');
     }
 
-    function storeImages(images: string[]) {
+    function storeImages(images: IImage[]) {
         console.log('r --> e (storeImages)');
         ipcRenderer.send('storeImages', images);
     }
@@ -49,5 +52,5 @@ export function useImageList(): IUseImageListHook {
         ipcRenderer.send('openImageFileDialog');
     }
 
-    return { images, fetchImages, storeImages, openImageFileDialog };
+    return { images, fetchImages, openImageFileDialog };
 }

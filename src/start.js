@@ -48,7 +48,11 @@ function createWindow() {
     });
     
     ipcMain.on('storeImages', async (event, images) => {
-        await db.storeImages(images);
+        try {
+            await db.storeImages(images);
+        } catch (error) {
+            event.sender.send('log', 'e --> r (error)' + error.message);
+        }
         event.sender.send('log', 'e --> r (storeImageResult)');
         event.sender.send('storeImageResult');
     });
