@@ -5,12 +5,7 @@ import { useImageList } from '../../hooks/UseImageList';
 
 export function ImageGrid() {
 
-    const [
-        images, 
-        fetchImages, 
-        storeImages,
-        openImageFileDialog,
-    ] = useImageList();
+    const { images, fetchImages, openImageFileDialog, } = useImageList();
 
     return (
         <div className={"image-grid-master"} >
