@@ -9,7 +9,7 @@ export function ImageGrid() {
 
     return (
         <div className={"image-grid-master"} >
-            { images.map(image => <PreviewImage base64Image={ image.image } key={ image.id }/>) }
+            { images.map(image => <PreviewImage imageBase64={ image.imageBase64 } key={ image.id }/>) }
             <button onClick={() => openImageFileDialog()}>Add Image</button>
             <button onClick={() => fetchImages()}>Fetch Images</button>
         </div>
