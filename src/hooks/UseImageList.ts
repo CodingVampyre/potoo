@@ -52,7 +52,6 @@ export function useImageList(): IUseImageListHook {
 
     /** */
     function openImageFileDialog() {
-        console.log('r --> e (openImageFileDialog)');
         ipcRenderer.send('openImageFileDialog');
     }
 
