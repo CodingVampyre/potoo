@@ -6,3 +6,15 @@
     margin-top: 100px;
     margin-bottom: 100px;
 }
+
+@media screen and (min-width: 1000px) {
+    .image-list-master {
+        width: 800px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .image-list-master {
+        width: 1000px;
+    }
+}

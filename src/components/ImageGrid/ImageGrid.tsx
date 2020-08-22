@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './ImageGrid.css';
-import { PreviewImage } from './PreviewImage';
 import { useImageList } from '../../hooks/UseImageList';
 import { ImageList } from './ImageList';
 
