@@ -1,0 +1,35 @@
+.image-modal-master {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+.image-modal-background {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+    opacity: 0.9;
+}
+
+.image-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    z-index: 100;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.image-modal-image {
+    border-radius: 16px;
+    height: 80%
+}
