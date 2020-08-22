@@ -3,6 +3,7 @@ import './PreviewImage.css';
 
 export function PreviewImage(props: {
     imageBase64: string;
+    onClick?: () => void;
 }) {
     return (
         <div 
@@ -10,6 +11,7 @@ export function PreviewImage(props: {
             onContextMenu={() => {
                 console.log('right click opens context menu');
             }}
+            onClick={() => props.onClick ? props.onClick() : undefined}
         >
             <img 
                 src={`data:image/png;base64, ${props.imageBase64}`} 

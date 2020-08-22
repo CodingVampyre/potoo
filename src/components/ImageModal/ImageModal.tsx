@@ -3,7 +3,9 @@ import { useState } from 'react';
 import './ImageModal.css';
 
 interface IProps {
-    imageBase64: string,
+    onClickBackground: () => void;
+    imageBase64: string;
+    isVisible: boolean;
 }
 
 export function ImageModal(props: IProps) {
@@ -16,7 +18,7 @@ export function ImageModal(props: IProps) {
                 <div className={"image-modal-master"}>
                     <div 
                         className={"image-modal-background"}
-                        onClick={() => setIsVisible(false)}
+                        onClick={() => props.onClickBackground()}
                     />
                     <div className="image-modal-wrapper">
                         <img 
