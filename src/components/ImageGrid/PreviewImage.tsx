@@ -14,6 +14,7 @@ export function PreviewImage(props: {
             onClick={() => props.onClick ? props.onClick() : undefined}
         >
             <img 
+                draggable={false}
                 src={`data:image/png;base64, ${props.imageBase64}`} 
                 className={"preview-image-image"}
                 alt="error"

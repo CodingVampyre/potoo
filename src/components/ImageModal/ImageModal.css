@@ -31,5 +31,6 @@
 
 .image-modal-image {
     border-radius: 16px;
-    height: 80%
+    max-width: 80%;
+    max-height: 80%;
 }

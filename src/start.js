@@ -15,6 +15,7 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
         },
+        titleBarStyle: 'hiddenInset',
     });
 
     mainWindow.loadURL(process.env.ELECTRON_START_URL || url.format({

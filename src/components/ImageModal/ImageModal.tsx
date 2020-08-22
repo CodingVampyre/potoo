@@ -22,6 +22,7 @@ export function ImageModal(props: IProps) {
                     />
                     <div className="image-modal-wrapper">
                         <img 
+                            draggable={false}
                             className={"image-modal-image"} 
                             src={`data:image/png;base64, ${props.imageBase64}`}
                         />
