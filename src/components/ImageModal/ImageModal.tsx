@@ -18,7 +18,6 @@ export function ImageModal(props: IProps) {
                 <div className={"image-modal-master"}>
                     <div 
                         className={"image-modal-background"}
-                        onClick={() => props.onClickBackground()}
                     />
                     <div className="image-modal-wrapper">
                         <img 
@@ -26,6 +25,11 @@ export function ImageModal(props: IProps) {
                             className={"image-modal-image"} 
                             src={`data:image/png;base64, ${props.imageBase64}`}
                         />
+                        <div className={"image-modal-buttons"}>
+                            <button className={"image-modal-button critical separate"}>Delete</button>
+                            <button className={"image-modal-button neutral"}>Manage Tags</button>
+                            <button className={"image-modal-button neutral"} onClick={() => props.onClickBackground()}>Close</button>
+                        </div>
                     </div>
                  </div>
             } 
