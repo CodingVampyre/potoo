@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import './ImageModal.css';
 import { IImage } from '../../hooks/UseImageList';
 
@@ -10,6 +10,20 @@ interface IProps {
 }
 
 export function ImageModal(props: IProps) {
+
+    useEffect(() => {
+
+        function keyDownListener(event: any) {
+            if (event.key === 'ArrowLeft') {
+                console.log('<');
+            } else if (event.key === 'ArrowRight') {
+                console.log('>');
+            }
+        }
+
+        document.addEventListener('keydown', keyDownListener);
+        return () => { document.removeEventListener('keydown', keyDownListener); }
+    }, []);
 
     return (
         <div className={"image-modal-master"}>
