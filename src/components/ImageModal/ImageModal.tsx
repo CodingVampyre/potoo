@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import './ImageModal.css';
 import { IImage } from '../../hooks/UseImageList';
 
@@ -19,6 +18,7 @@ export function ImageModal(props: IProps) {
             />
             <div className="image-modal-wrapper">
                 <img
+                    alt={props.image.id}
                     draggable={false}
                     className={"image-modal-image"}
                     src={`data:image/png;base64, ${props.image.imageBase64}`}
