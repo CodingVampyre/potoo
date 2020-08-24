@@ -13,9 +13,7 @@ export function ImageGrid() {
         <div className={"image-grid-master"} >
             <ImageList 
                 images={ images } 
-                onSelectImage={(index) => {
-                    setCurrentlySelectedImage(index);
-                }}
+                onSelectImage={(index) => setCurrentlySelectedImage(index)}
             />
             <button onClick={() => openImageFileDialog()}>Add Image</button>
             {
@@ -28,6 +26,16 @@ export function ImageGrid() {
                         onClickDelete={(id: string) => {
                             setCurrentlySelectedImage(undefined);
                             deleteImage(id);
+                        }}
+                        onNavigateImages={(direction) => {
+                            setCurrentlySelectedImage(current => {
+                                if (current !== undefined) {
+                                    const next = current + direction;
+                                    if (next < 0 || next >= images.length) { return current; }
+                                    return next;
+                                }
+                                return undefined;
+                            });
                         }}
                     />
             }

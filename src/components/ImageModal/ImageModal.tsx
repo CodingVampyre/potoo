@@ -5,6 +5,7 @@ import { IImage } from '../../hooks/UseImageList';
 interface IProps {
     onClickBackground: () => void;
     onClickDelete: (id: string) => void;
+    onNavigateImages: (direction: -1 | 1) => void;
     isVisible: boolean;
     image: IImage;
 }
@@ -15,18 +16,18 @@ export function ImageModal(props: IProps) {
 
         function keyDownListener(event: any) {
             if (event.key === 'ArrowLeft') {
-                console.log('<');
+                props.onNavigateImages(-1);
             } else if (event.key === 'ArrowRight') {
-                console.log('>');
+                props.onNavigateImages(1);
             }
         }
 
         document.addEventListener('keydown', keyDownListener);
         return () => { document.removeEventListener('keydown', keyDownListener); }
-    }, []);
+    }, [props]);
 
     return (
-        <div className={"image-modal-master"}>
+        <div className={"image-modal-master"} ref={e => e?.click()}>
             <div
                 className={"image-modal-background"}
             />
