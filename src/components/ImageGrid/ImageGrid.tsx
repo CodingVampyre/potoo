@@ -14,7 +14,6 @@ export function ImageGrid() {
             <ImageList 
                 images={ images } 
                 onSelectImage={(index) => {
-                    console.log(`selected image nr ${index}`);
                     setCurrentlySelectedImage(index);
                 }}
             />

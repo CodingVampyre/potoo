@@ -21,12 +21,10 @@ export function useImageList(): IUseImageListHook {
 
     useEffect(() => {
         ipcRenderer.on('fetchImagesResult', (event, images: IImage[]) => {
-            console.debug('[fetchImagesResult]', images);
             setImages(images);
         });
 
         ipcRenderer.on('storeImageResult', (event) => {
-            console.debug('[storeImageResult]');
             fetchImages();
         });
 

@@ -8,9 +8,6 @@ export function PreviewImage(props: {
     return (
         <div 
             className={"preview-image-master"}
-            onContextMenu={() => {
-                console.log('right click opens context menu');
-            }}
             onClick={() => props.onClick ? props.onClick() : undefined}
         >
             <img 
