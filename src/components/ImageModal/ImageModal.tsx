@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react';
 import './ImageModal.css';
+import { IImage } from '../../hooks/UseImageList';
 
 interface IProps {
     onClickBackground: () => void;
-    imageBase64: string;
+    onClickDelete: (id: string) => void;
     isVisible: boolean;
+    image: IImage;
 }
 
 export function ImageModal(props: IProps) {
@@ -23,10 +25,10 @@ export function ImageModal(props: IProps) {
                         <img 
                             draggable={false}
                             className={"image-modal-image"} 
-                            src={`data:image/png;base64, ${props.imageBase64}`}
+                            src={`data:image/png;base64, ${props.image.imageBase64}`}
                         />
                         <div className={"image-modal-buttons"}>
-                            <button className={"image-modal-button critical separate"}>Delete</button>
+                            <button className={"image-modal-button critical separate"} onClick={() => props.onClickDelete(props.image.id)}>Delete</button>
                             <button className={"image-modal-button neutral"}>Manage Tags</button>
                             <button className={"image-modal-button neutral"} onClick={() => props.onClickBackground()}>Close</button>
                         </div>

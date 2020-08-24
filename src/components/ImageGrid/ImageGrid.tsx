@@ -6,7 +6,7 @@ import { ImageModal } from '../ImageModal/ImageModal';
 
 export function ImageGrid() {
 
-    const { images, openImageFileDialog, } = useImageList();
+    const { images, openImageFileDialog, deleteImage, } = useImageList();
     const [currentlySelectedImage, setCurrentlySelectedImage] = React.useState<number | undefined>(undefined);
 
     return (
@@ -23,9 +23,13 @@ export function ImageGrid() {
                 currentlySelectedImage !== undefined && 
                 images[currentlySelectedImage] !== undefined && 
                     <ImageModal 
-                        imageBase64={ images[currentlySelectedImage].imageBase64 }
+                        image={ images[currentlySelectedImage] }
                         isVisible={currentlySelectedImage !== undefined}
                         onClickBackground={() => setCurrentlySelectedImage(undefined)}
+                        onClickDelete={(id: string) => {
+                            setCurrentlySelectedImage(undefined);
+                            deleteImage(id);
+                        }}
                     />
             }
         </div>

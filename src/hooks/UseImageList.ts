@@ -12,6 +12,7 @@ interface IUseImageListHook {
     images: IImage[];
     fetchImages: () => void;
     openImageFileDialog: () => void;
+    deleteImage: (id: string) => void;
 }
 
 export function useImageList(): IUseImageListHook {
@@ -35,6 +36,10 @@ export function useImageList(): IUseImageListHook {
             });
             storeImages(images);
         });
+
+        ipcRenderer.on('deleteImageResult', () => {
+            console.log('image was removed');
+        });
     }, []);
 
     useEffect(() => {
@@ -43,13 +48,11 @@ export function useImageList(): IUseImageListHook {
 
     /** */
     function fetchImages() {
-        console.log('r --> e (fetchImages)');
         ipcRenderer.send('fetchImages');
     }
 
     /** */
     function storeImages(images: IImage[]) {
-        console.log('r --> e (storeImages)');
         ipcRenderer.send('storeImages', images);
     }
 
@@ -58,5 +61,11 @@ export function useImageList(): IUseImageListHook {
         ipcRenderer.send('openImageFileDialog');
     }
 
-    return { images, fetchImages, openImageFileDialog };
+    /** */
+    function deleteImage(id: string) {
+        ipcRenderer.send('deleteImage', id);
+        fetchImages();
+    }
+
+    return { images, fetchImages, openImageFileDialog, deleteImage };
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import { TagBar } from './TagBar/TagBar';
 import { ImageGrid } from './ImageGrid/ImageGrid';

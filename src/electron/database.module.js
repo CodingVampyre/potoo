@@ -23,4 +23,13 @@ function listImages() {
     });
 }
 
-module.exports = { storeImages, listImages }
+function removeImage(id) {
+    return new Promise((resolve, reject) => {
+        db.remove({ id }, {}, (error, result) => {
+            if (error) { return reject(error); }
+            return resolve(result);
+        });
+    });
+}
+
+module.exports = { storeImages, listImages, removeImage }

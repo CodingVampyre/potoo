@@ -59,6 +59,11 @@ function createWindow() {
         const images = await db.listImages();
         event.sender.send('fetchImagesResult', images);
     });
+
+    ipcMain.on('deleteImage', async (event, id) => {
+        await db.removeImage(id);
+        event.sender.send('deleteImageResult');
+    })
 } 
 
 app.on('ready', createWindow);
