@@ -4,6 +4,17 @@
 	background-color: #242424;
 
 	display: grid;
-	grid-template-rows: 100px 1fr;
+	grid-template-rows: 35px calc(100vh - 35px);
 	grid-template-columns: 100%;
+}
+
+.app-content {
+	display: grid;
+	grid-template-rows: 100%;
+	grid-template-columns: 200px 1fr;
+}
+
+.app-header-bar {
+	-webkit-app-region: drag;
+	background-color: #111;
 }

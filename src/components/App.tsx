@@ -6,8 +6,11 @@ import { ImageGrid } from './ImageGrid/ImageGrid';
 function App() {
 	return (
 		<div className="app-layout">
-			<TagBar />
-			<ImageGrid />
+			<div className={"app-header-bar"}/>
+			<div className={"app-content"}>
+				<TagBar />
+				<ImageGrid />
+			</div>
 		</div>
 	);
 }
