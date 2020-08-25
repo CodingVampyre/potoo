@@ -1,5 +1,5 @@
 .tag-master {
-    background-color: #888;
+    background-color: #444;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
@@ -13,7 +13,7 @@
 }
 
 .tag-text {
-    color: #111;
+    color: white;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
@@ -27,5 +27,5 @@
     height: 14px;
     width: 14px;
     display: inline-block;
-    margin-right: 5px;
+    margin-left: 5px;
 }

@@ -6,7 +6,7 @@ import { ImageModal } from '../ImageModal/ImageModal';
 
 export function ImageGrid() {
 
-    const { images, openImageFileDialog, deleteImage, } = useImageList();
+    const { images, openImageFileDialog, deleteImage, updateTags } = useImageList();
     const [currentlySelectedImage, setCurrentlySelectedImage] = React.useState<number | undefined>(undefined);
 
     return (
@@ -36,6 +36,11 @@ export function ImageGrid() {
                                 }
                                 return undefined;
                             });
+                        }}
+                        onAddTag={(text) => {
+                            const newTags = [...images[currentlySelectedImage].tags, text];
+                            console.log(images[currentlySelectedImage].id, newTags);
+                            updateTags(images[currentlySelectedImage].id, newTags);
                         }}
                     />
             }

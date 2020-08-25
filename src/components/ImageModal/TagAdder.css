@@ -1,0 +1,38 @@
+.tag-adder-master {
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    background-color: #444;
+    border-radius: 12px 12px 12px 12px;
+}
+
+.tag-adder-input {
+    font-size: 12px;
+    width: 100px;
+    border: none;
+    border-radius: 12px 0 0 12px;
+    color: rgb(24, 207, 0);
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 0 0 2px 0 #222 inset;
+    background-color: #444;
+}
+
+.tag-adder-input:focus {
+    outline: none;
+}
+
+.tag-adder-button {
+    font-size: 20px;
+    line-height: 20px;
+    border: none;
+    background-color: #444;
+    color: rgb(24, 207, 0);
+    border-radius: 12px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.tag-adder-button:focus {
+    outline: none;
+}

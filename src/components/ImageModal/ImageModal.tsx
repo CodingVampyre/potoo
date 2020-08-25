@@ -2,11 +2,13 @@ import React, {useEffect} from 'react';
 import './ImageModal.css';
 import { IImage } from '../../hooks/UseImageList';
 import { TagList } from './TagList';
+const { ipcRenderer } = window.require('electron');
 
 interface IProps {
     onClickBackground: () => void;
     onClickDelete: (id: string) => void;
     onNavigateImages: (direction: -1 | 1) => void;
+    onAddTag: (text: string) => void;
     isVisible: boolean;
     image: IImage;
 }
@@ -30,7 +32,10 @@ export function ImageModal(props: IProps) {
                 className={"image-modal-background"}
             />
             <div className="image-modal-wrapper">
-                <TagList tags={ props.image.tags } />
+                <TagList 
+                    tags={ props.image.tags } 
+                    onAddTag={(text) => props.onAddTag(text)}
+                />
                 <div className={"image-modal-content"}>
                     <img
                         alt={props.image.id}
