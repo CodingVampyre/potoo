@@ -32,4 +32,13 @@ function removeImage(id) {
     });
 }
 
-module.exports = { storeImages, listImages, removeImage }
+function updateTags(id, tags) {
+    return new Promise((resolve, reject) => {
+        db.update({ id }, { $set: { tags } }, {}, (error, result) => {
+            if (error) { return reject(error); }
+            return resolve(result);
+        })
+    })
+}
+
+module.exports = { storeImages, listImages, removeImage, updateTags }

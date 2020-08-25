@@ -1,0 +1,31 @@
+.tag-master {
+    background-color: #888;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 12px;
+    height: 24px;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 24px;
+}
+
+.tag-text {
+    color: #111;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.tag-x {
+    cursor: pointer;
+    color: white;
+    background-color: #800;
+    border-radius: 7px;
+    height: 14px;
+    width: 14px;
+    display: inline-block;
+    margin-right: 5px;
+}

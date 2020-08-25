@@ -63,7 +63,12 @@ function createWindow() {
     ipcMain.on('deleteImage', async (event, id) => {
         await db.removeImage(id);
         event.sender.send('deleteImageResult');
-    })
+    });
+
+    ipcMain.on('updateTags', async (event, id, tags) => {
+        await db.updateTags(id, tags);
+        event.sender.send('updateTagsResult');
+    });
 } 
 
 app.on('ready', createWindow);
