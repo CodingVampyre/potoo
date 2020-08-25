@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import './ImageModal.css';
 import { IImage } from '../../hooks/UseImageList';
 import { TagList } from './TagList';
-const { ipcRenderer } = window.require('electron');
 
 interface IProps {
     onClickBackground: () => void;

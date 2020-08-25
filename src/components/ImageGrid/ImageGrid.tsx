@@ -39,7 +39,6 @@ export function ImageGrid() {
                         }}
                         onAddTag={(text) => {
                             const newTags = [...images[currentlySelectedImage].tags, text];
-                            console.log(images[currentlySelectedImage].id, newTags);
                             updateTags(images[currentlySelectedImage].id, newTags);
                         }}
                     />

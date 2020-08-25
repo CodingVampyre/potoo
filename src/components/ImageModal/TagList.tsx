@@ -11,8 +11,10 @@ interface IProps {
 export function TagList(props: IProps) {
     return (
         <div className={"image-modal-tags"}>
-            { props.tags.map(tag => <Tag 
-                text={tag} onClick={() => {
+            { props.tags.map(tag => <Tag
+                key={tag} 
+                text={tag} 
+                onClick={() => {
                     console.log('clicked', tag);
                 }} 
                 onClickDelete={() => {

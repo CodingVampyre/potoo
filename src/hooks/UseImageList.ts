@@ -72,7 +72,7 @@ export function useImageList(): IUseImageListHook {
     }
 
     function updateTags(id: string, tags: string[]) {
-        ipcRenderer.send('updateTags', tags);
+        ipcRenderer.send('updateTags', id, tags);
     }
 
     return { images, fetchImages, openImageFileDialog, deleteImage, updateTags };
