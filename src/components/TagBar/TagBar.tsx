@@ -1,10 +1,26 @@
 import * as React from 'react';
 import './TagBar.css';
+import { TagSearch } from './TagSearch';
+import { useState } from 'react';
+import { Tag } from '../ImageModal/Tag';
 
 export function TagBar() {
+
+    const [tags, setTags] = useState<string[]>([]);
+
     return (
         <div className={"tag-bar-master"}>
-            I Am The Tag Bar
+            <TagSearch 
+                onClickSearchButton={(tags) => {
+                    console.log(tags);
+                }}
+                onEnterText={(newTags) => setTags(newTags)}
+            />
+            {tags.map(tag => <Tag 
+                text={tag}
+                onClick={() => {}}
+                onClickDelete={() => {}}
+            />)}
         </div>
     );
 }
