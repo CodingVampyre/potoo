@@ -37,8 +37,24 @@ function updateTags(id, tags) {
         db.update({ id }, { $set: { tags } }, {}, (error, result) => {
             if (error) { return reject(error); }
             return resolve(result);
-        })
-    })
+        });
+    });
 }
 
-module.exports = { storeImages, listImages, removeImage, updateTags }
+function searchImagesByTags(tags) {
+    const tagList = tags.map(tag => { return { tag } });
+    return new Promise((resolve, reject) => {
+        db.find({ $and: tagList }, (error, docs) => {
+            if (error) { return reject(error); }
+            return resolve(docs);
+        });
+    });
+}
+
+module.exports = { 
+    storeImages, 
+    listImages, 
+    removeImage, 
+    updateTags,
+    searchImagesByTags,
+}

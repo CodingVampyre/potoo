@@ -69,6 +69,11 @@ function createWindow() {
         await db.updateTags(id, tags);
         event.sender.send('updateTagsResult');
     });
+
+    ipcMain.on('fetchImagesByTags', async (event, tags) => {
+        const images = await db.searchImagesByTags(tags);
+        event.sender.send('fetchImagesByTagsResult', images);
+    });
 } 
 
 app.on('ready', createWindow);
