@@ -42,7 +42,7 @@ function updateTags(id, tags) {
 }
 
 function searchImagesByTags(tags) {
-    const tagList = tags.map(tag => { return { tag } });
+    const tagList = tags.map(tag => { return { tags: tag } });
     return new Promise((resolve, reject) => {
         db.find({ $and: tagList }, (error, docs) => {
             if (error) { return reject(error); }

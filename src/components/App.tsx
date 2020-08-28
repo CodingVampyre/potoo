@@ -12,7 +12,9 @@ function App() {
 		<div className="app-layout">
 			<div className={"app-header-bar"}/>
 			<div className={"app-content"}>
-				<TagBar />
+				<TagBar 
+					onStartSearchTags={ (tags: string[]) => searchImagesByTags(tags) }
+				/>
 				<ImageGrid 
 					images={ images }
 					onClickAddImageButton={ () => openImageFileDialog() }
