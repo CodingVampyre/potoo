@@ -1,45 +1,51 @@
 import * as React from 'react';
 import './ImageGrid.css';
-import { useImageList } from '../../hooks/UseImageList';
+import { useImageList, IImage } from '../../hooks/UseImageList';
 import { ImageList } from './ImageList';
 import { ImageModal } from '../ImageModal/ImageModal';
 
-export function ImageGrid() {
+interface IProps {
+    images: IImage[];
+    onClickAddImageButton: () => void;
+    onDeleteImage: (id: string) => void;
+    onUpdateTags: (id: string, newTags: string[]) => void;
+}
 
-    const { images, openImageFileDialog, deleteImage, updateTags } = useImageList();
+export function ImageGrid(props: IProps) {
+
     const [currentlySelectedImage, setCurrentlySelectedImage] = React.useState<number | undefined>(undefined);
 
     return (
         <div className={"image-grid-master"} >
             <ImageList 
-                images={ images } 
+                images={ props.images } 
                 onSelectImage={(index) => setCurrentlySelectedImage(index)}
             />
-            <button onClick={() => openImageFileDialog()}>Add Image</button>
+            <button onClick={() => props.onClickAddImageButton}>Add Image</button>
             {
                 currentlySelectedImage !== undefined && 
-                images[currentlySelectedImage] !== undefined && 
+                props.images[currentlySelectedImage] !== undefined && 
                     <ImageModal 
-                        image={ images[currentlySelectedImage] }
+                        image={ props.images[currentlySelectedImage] }
                         isVisible={currentlySelectedImage !== undefined}
                         onClickBackground={() => setCurrentlySelectedImage(undefined)}
                         onClickDelete={(id: string) => {
                             setCurrentlySelectedImage(undefined);
-                            deleteImage(id);
+                            props.onDeleteImage(id);
                         }}
                         onNavigateImages={(direction) => {
                             setCurrentlySelectedImage(current => {
                                 if (current !== undefined) {
                                     const next = current + direction;
-                                    if (next < 0 || next >= images.length) { return current; }
+                                    if (next < 0 || next >= props.images.length) { return current; }
                                     return next;
                                 }
                                 return undefined;
                             });
                         }}
                         onAddTag={(text) => {
-                            const newTags = [...images[currentlySelectedImage].tags, text];
-                            updateTags(images[currentlySelectedImage].id, newTags);
+                            const newTags = [...props.images[currentlySelectedImage].tags, text];
+                            props.onUpdateTags(props.images[currentlySelectedImage].id, newTags)
                         }}
                     />
             }
