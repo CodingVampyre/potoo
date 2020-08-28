@@ -22,15 +22,15 @@ export function useImageList(): IUseImageListHook {
     const [images, setImages] = useState<IImage[]>([]);
 
     useEffect(() => {
-        ipcRenderer.on('fetchImagesResult', (event, images: IImage[]) => {
+        ipcRenderer.on('fetchImagesResult', (event: any, images: IImage[]) => {
             setImages(images);
         });
 
-        ipcRenderer.on('storeImageResult', (event) => {
+        ipcRenderer.on('storeImageResult', (event: any) => {
             fetchImages();
         });
 
-        ipcRenderer.on('openImageFileDialogResult', (event, imagesBase64: string[]) => {
+        ipcRenderer.on('openImageFileDialogResult', (event: any, imagesBase64: string[]) => {
             const images: IImage[] = imagesBase64.map(imageBase64 => {
                 return { id: uuid(), imageBase64, tags: [], }
             });
@@ -46,7 +46,7 @@ export function useImageList(): IUseImageListHook {
             fetchImages();
         });
 
-        ipcRenderer.on('fetchImagesByTagsResult', (event, images: IImage[]) => {
+        ipcRenderer.on('fetchImagesByTagsResult', (event: any, images: IImage[]) => {
             console.log(images.length, 'images');
             setImages(images);
         });

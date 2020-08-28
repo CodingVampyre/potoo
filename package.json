@@ -1,9 +1,11 @@
 {
 	"name": "potoo",
 	"version": "0.1.0",
+	"author": { "email": "tovuko@hotmail.de", "name": "Tobias Kavšek" },
+	"description": "image management tool for small collections",
 	"private": true,
 	"homepage": "./",
-	"main": "src/start.js",
+	"main": "public/electron.js",
 	"dependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
@@ -34,6 +36,10 @@
 	},
 	"build": {
 		"appId": "com.electron.electron-with-create-react-app",
+		"files":[
+			"build/**/*",
+			"node_module/**/*"
+		], 
 		"win": {
 			"icon": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
 		},
