@@ -9,6 +9,7 @@ interface IProps {
     onClickAddImageButton: () => void;
     onDeleteImage: (id: string) => void;
     onUpdateTags: (id: string, newTags: string[]) => void;
+    onClickTag: (tag: string) => void;
 }
 
 export function ImageGrid(props: IProps) {
@@ -50,6 +51,10 @@ export function ImageGrid(props: IProps) {
                         onDeleteTag={(tagToDelete: string) => {
                             const newTags = props.images[currentlySelectedImage].tags.filter(tag => tag !== tagToDelete);
                             props.onUpdateTags(props.images[currentlySelectedImage].id, newTags);
+                        }}
+                        onClickTag={ (tag) => {
+                            setCurrentlySelectedImage(undefined);
+                            props.onClickTag(tag);
                         }}
                     />
             }

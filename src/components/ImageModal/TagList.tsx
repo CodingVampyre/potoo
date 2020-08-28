@@ -7,6 +7,7 @@ interface IProps {
     tags: string[];
     onAddTag: (text: string) => void;
     onDeleteTag: (tag: string) => void;
+    onClickTag: (tag: string) => void;
 }
 
 export function TagList(props: IProps) {
@@ -15,9 +16,7 @@ export function TagList(props: IProps) {
             { props.tags.map(tag => <Tag
                 key={tag} 
                 text={tag} 
-                onClick={() => {
-                    console.log('clicked', tag);
-                }} 
+                onClick={ () => props.onClickTag(tag) } 
                 onClickDelete={ () => props.onDeleteTag(tag) }
             />) }
             <TagAdder 

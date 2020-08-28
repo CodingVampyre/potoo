@@ -20,6 +20,7 @@ function App() {
 					onClickAddImageButton={ () => openImageFileDialog() }
 					onDeleteImage={ (id: string) => deleteImage(id) }
 					onUpdateTags={ (id: string, tags: string[]) => updateTags(id, tags) }
+					onClickTag={ (tag: string) => searchImagesByTags([tag]) }
 				/>
 			</div>
 		</div>
