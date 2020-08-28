@@ -32,7 +32,7 @@ export function ImageModal(props: IProps) {
             <div
                 className={"image-modal-background"}
             />
-            <div className="image-modal-wrapper">
+            <div className={"image-modal-wrapper grid-with-tags"}>
                 <TagList 
                     tags={ props.image.tags } 
                     onAddTag={(text) => props.onAddTag(text)}

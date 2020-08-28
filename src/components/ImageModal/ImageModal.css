@@ -23,7 +23,14 @@
     right: 0;
     display: grid;
     grid-template-rows: 100vh;
+}
+
+.grid-with-tags {
     grid-template-columns: 200px 1fr;
+}
+
+.grid-without-tags {
+    grid-template-columns: 1fr;
 }
 
 .image-modal-content {
