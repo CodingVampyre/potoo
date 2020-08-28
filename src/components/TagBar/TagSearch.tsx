@@ -11,8 +11,14 @@ export function TagSearch(props: IProps) {
     const [input, setInput] = React.useState('');
 
     function generateTags(input: string): string[] {
-        return input.trim().split(' ');
+        return input === '' ? [] : input.trim().toLocaleLowerCase().split(' ');
     }
+
+    React.useEffect(() => {
+        if (props.onEnterText) {
+            props.onEnterText(generateTags(input));
+        }
+    }, [input]);
 
     return (
         <div className={"tag-search-master"}>
@@ -21,7 +27,6 @@ export function TagSearch(props: IProps) {
                 type={"text"}
                 onChange={(event) => {
                     setInput(event.target.value);
-                    if (props.onEnterText) { props.onEnterText(generateTags(input)); }
                 }}
             />
             <button

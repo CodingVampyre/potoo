@@ -14,9 +14,12 @@ export function TagBar() {
                 onClickSearchButton={(tags) => {
                     console.log(tags);
                 }}
-                onEnterText={(newTags) => setTags(newTags)}
+                onEnterText={(newTags) => {
+                    setTags(newTags);
+                }}
             />
             {tags.map(tag => <Tag 
+                key={tag}
                 text={tag}
                 onClick={() => {}}
                 onClickDelete={() => {}}
