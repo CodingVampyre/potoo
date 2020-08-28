@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './ImageModal.css';
 import { IImage } from '../../hooks/UseImageList';
 import { TagList } from './TagList';
@@ -16,6 +16,8 @@ interface IProps {
 
 export function ImageModal(props: IProps) {
 
+    const [showTags, setShowTags] = useState(false);
+
     useEffect(() => {
 
         function keyDownListener(event: any) {
@@ -32,13 +34,13 @@ export function ImageModal(props: IProps) {
             <div
                 className={"image-modal-background"}
             />
-            <div className={"image-modal-wrapper grid-with-tags"}>
-                <TagList 
+            <div className={showTags ? "image-modal-wrapper grid-with-tags" : "image-modal-wrapper grid-without-tags"}>
+                { showTags && <TagList 
                     tags={ props.image.tags } 
                     onAddTag={(text) => props.onAddTag(text)}
                     onDeleteTag={ (tag) => props.onDeleteTag(tag) }
                     onClickTag={ (tag) => props.onClickTag(tag) }
-                />
+                /> }
                 <div className={"image-modal-content"}>
                     <img
                         alt={props.image.id}
@@ -48,7 +50,7 @@ export function ImageModal(props: IProps) {
                     />
                     <div className={"image-modal-buttons"}>
                         <button className={"image-modal-button critical separate"} onClick={() => props.onClickDelete(props.image.id)}>Delete</button>
-                        <button className={"image-modal-button neutral"}>Manage Tags</button>
+                        <button className={"image-modal-button neutral"} onClick={() => setShowTags(!showTags)}>Manage Tags</button>
                         <button className={"image-modal-button neutral"} onClick={() => props.onClickBackground()}>Close</button>
                     </div>
                 </div>
