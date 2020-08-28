@@ -8,6 +8,7 @@ interface IProps {
     onClickDelete: (id: string) => void;
     onNavigateImages: (direction: -1 | 1) => void;
     onAddTag: (text: string) => void;
+    onDeleteTag: (tag: string) => void;
     isVisible: boolean;
     image: IImage;
 }
@@ -34,6 +35,7 @@ export function ImageModal(props: IProps) {
                 <TagList 
                     tags={ props.image.tags } 
                     onAddTag={(text) => props.onAddTag(text)}
+                    onDeleteTag={(tag) => props.onDeleteTag(tag)}
                 />
                 <div className={"image-modal-content"}>
                     <img

@@ -6,6 +6,7 @@ import { TagAdder } from './TagAdder';
 interface IProps {
     tags: string[];
     onAddTag: (text: string) => void;
+    onDeleteTag: (tag: string) => void;
 }
 
 export function TagList(props: IProps) {
@@ -17,9 +18,7 @@ export function TagList(props: IProps) {
                 onClick={() => {
                     console.log('clicked', tag);
                 }} 
-                onClickDelete={() => {
-                    console.log('delete-a-tag', tag);
-                }}
+                onClickDelete={ () => props.onDeleteTag(tag) }
             />) }
             <TagAdder 
                 onAddtag={(text: string) => props.onAddTag(text)}

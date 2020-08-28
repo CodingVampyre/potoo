@@ -45,7 +45,11 @@ export function ImageGrid(props: IProps) {
                         }}
                         onAddTag={(text) => {
                             const newTags = [...props.images[currentlySelectedImage].tags, text];
-                            props.onUpdateTags(props.images[currentlySelectedImage].id, newTags)
+                            props.onUpdateTags(props.images[currentlySelectedImage].id, newTags);
+                        }}
+                        onDeleteTag={(tagToDelete: string) => {
+                            const newTags = props.images[currentlySelectedImage].tags.filter(tag => tag !== tagToDelete);
+                            props.onUpdateTags(props.images[currentlySelectedImage].id, newTags);
                         }}
                     />
             }
