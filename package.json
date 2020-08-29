@@ -1,11 +1,14 @@
 {
 	"name": "potoo",
 	"version": "0.1.0",
-	"author": { "email": "tovuko@hotmail.de", "name": "Tobias Kavšek" },
+	"author": {
+		"email": "tovuko@hotmail.de",
+		"name": "Tobias Kavšek"
+	},
 	"description": "image management tool for small collections",
 	"private": true,
 	"homepage": "./",
-	"main": "public/electron/main.js",
+	"main": "electron/main.js",
 	"dependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
@@ -28,10 +31,20 @@
 		"eject": "react-scripts eject",
 		"electron": "electron .",
 		"electron-start": "node src/start-react",
-		"react-start": "BROWSER=none react-scripts start",
-		"pack": "electron-builder --dir -c.extraMetadata.main=public/electron/main.js",
+		"react-start": "BROWSER=none react-scripts start -c.extraMetadata.main=main/main.js",
+		"pack": "electron-builder --dir",
 		"dist": "npm run build && build",
-		"postinstall": "install-app-deps"
+		"postinstall": "install-app-deps",
+		"compile": "electron-webpack"
+	},
+	"electronWebpack": {
+		"commonSourceDirectory": "common",
+		"main": {
+			"sourceDirectory": "electron"
+		},
+		"renderer": {
+			"sourceDirectory": null
+		}
 	},
 	"build": {
 		"appId": "com.electron.electron-with-create-react-app",
@@ -63,7 +76,8 @@
 	},
 	"devDependencies": {
 		"@types/uuid": "^8.3.0",
+		"electron": "^9.2.0",
 		"electron-builder": "^22.8.0",
-		"electron": "^9.2.0"
+		"electron-webpack": "^2.8.2"
 	}
 }
