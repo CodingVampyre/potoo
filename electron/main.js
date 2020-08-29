@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
 const Fs = require('fs');
-const db = require('./electron/database.module');
+const db = require('./database.module');
 
 let mainWindow;
 

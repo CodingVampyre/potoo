@@ -5,7 +5,7 @@
 	"description": "image management tool for small collections",
 	"private": true,
 	"homepage": "./",
-	"main": "public/electron.js",
+	"main": "./electron/main.js",
 	"dependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
@@ -28,7 +28,7 @@
 		"eject": "react-scripts eject",
 		"electron": "electron .",
 		"electron-start": "node src/start-react",
-		"electron-build": "electron-builder -m dmg",
+		"electron-build": "rm -rf ./dist && electron-builder",
 		"react-start": "BROWSER=none react-scripts start",
 		"pack": "build --dir",
 		"dist": "npm run build && build",
@@ -36,16 +36,13 @@
 	},
 	"build": {
 		"appId": "com.electron.electron-with-create-react-app",
-		"files":[
-			"build/**/*",
-			"node_module/**/*"
-		], 
 		"win": {
 			"icon": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
 		},
 		"directories": {
-			"buildResources": "public"
-		}
+			"buildResources": "assets"
+		},
+		"extends": null
 	},
 	"eslintConfig": {
 		"extends": "react-app"
